@@ -2,9 +2,10 @@ const router = require("express").Router();
 const User = require("../model/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const verify = require("../verifyToken");
 
 //REGISTER
-router.post("/", async (req, res) => {
+router.post("/", verify,async (req, res) => {
 
   console.log("apifdgd is running")
   const newUser = new User({
@@ -26,7 +27,7 @@ router.post("/", async (req, res) => {
 });
 
 //LOGIN
-router.post("/login", async (req, res) => {
+router.post("/login",verify, async (req, res) => {
 
   console.log(req.body.password)
   console.log(req.body.email)

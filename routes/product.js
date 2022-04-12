@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Product = require("../model/Product");
 const verify = require("../verifyToken");
 
-router.post('/',async(req,res)=>{
+router.post('/',verify,async(req,res)=>{
 
   const newproduct = new Product({
     productname:req.body.productname,
@@ -27,7 +27,7 @@ res.status(200).json(savedproduct)
 
 
 
-router.get("/",async(req,res)=>{
+router.get("/",verify,async(req,res)=>{
     //if(req.user.isAdmin){
 
    // console.log(req.query.company)

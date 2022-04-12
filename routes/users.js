@@ -61,7 +61,7 @@ router.get("/", verify,async (req, res) => {
 
 
 
-router.put("/orders",async(req,res)=>{
+router.put("/orders",verify,async(req,res)=>{
   console.log(req.body.userid)
   var newid = mongoose.Types.ObjectId();
   
@@ -105,7 +105,7 @@ res.status(400).json(err)
 })  
   
 
-router.put("/notification",async(req,res)=>{
+router.put("/notification",verify,async(req,res)=>{
 
  console.log(req.query.userid)
  console.log(req.query.quantity)
@@ -150,7 +150,7 @@ router.put("/notification",async(req,res)=>{
   
   })
 
-router.put("/ordermessage",async(req,res)=>{
+router.put("/ordermessage",verify,async(req,res)=>{
   
 console.log("order reviecd")
   var id = mongoose.Types.ObjectId();
@@ -188,7 +188,7 @@ console.log("order reviecd")
 
 })
 
-router.put("/removenot", async (req, res) => {
+router.put("/removenot",verify,async (req, res) => {
   //if (req.user.isAdmin) {
    
     var newid = ObjectId(req.body.userid);
@@ -235,7 +235,7 @@ router.put("/removenot", async (req, res) => {
 
 })
 
-router.post("/getuser",async (req, res) => {
+router.post("/getuser",verify,async (req, res) => {
   const userId = req.body.userid;
   const username = req.body.username;
   console.log(userId)
@@ -259,7 +259,7 @@ $and:[{
 
 
 
-router.put("/read",async(req,res)=>{
+router.put("/read",verify,async(req,res)=>{
   console.log("the myuserid"+req.body.myuserid)
   console.log("the notificatiionid"+req.body.notificationid)
 
@@ -301,7 +301,7 @@ res.status(200).json(newupdat)
 
 
 
-router.post("/cleardata", async (req, res) => {
+router.post("/cleardata",verify, async (req, res) => {
   //if (req.user.isAdmin) {
    
     var newid = ObjectId(req.body.myuserid);

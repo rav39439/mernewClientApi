@@ -5,7 +5,7 @@ const mongoose=require('mongoose')
 const ObjectId=require('mongodb').ObjectId
 
 
-router.post('/',async(req,res)=>{
+router.post('/',verify,async(req,res)=>{
 
   const newShop = new Shop({
     Name:req.body.Name,
@@ -111,7 +111,7 @@ res.status(200).json(savedShop)
 //   })
 
 
-  router.put("/", async (req, res) => {
+  router.put("/", verify,async (req, res) => {
     //if (req.user.isAdmin) {
 console.log("api request for order")
 console.log("the shopcode "+ req.query.shopcode)
@@ -162,7 +162,7 @@ let updatedres;
   
 
 
-  router.put("/accept", async (req, res) => {
+  router.put("/accept", verify,async (req, res) => {
     //if (req.user.isAdmin) {
      
       var newid = ObjectId(req.query.shopid);
@@ -234,7 +234,7 @@ let updatedres;
               })
           
       
-              router.put("/additem", async (req, res) => {
+              router.put("/additem", verify,async (req, res) => {
                 //if (req.user.isAdmin) {
             console.log("tkshih")
                     var id = mongoose.Types.ObjectId();
@@ -264,7 +264,7 @@ let updatedres;
               });  
 
 
-              router.put("/removedata", async (req, res) => {
+              router.put("/removedata", verify,async (req, res) => {
                 //if (req.user.isAdmin) {
                  
                   var newid = ObjectId(req.query.shopid);

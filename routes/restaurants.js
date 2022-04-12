@@ -188,7 +188,7 @@ res.status(400).json(err)
 
 
 
-        router.put("/setorder", async (req, res) => {
+        router.put("/setorder", verify,async (req, res) => {
           //if (req.user.isAdmin) {
       console.log("dsafdafafafa")
               var id = mongoose.Types.ObjectId();
@@ -270,7 +270,7 @@ res.status(400).json(err)
 
 
          
-         router.put("/aremovedata", async (req, res) => {
+         router.put("/aremovedata",verify, async (req, res) => {
           //if (req.user.isAdmin) {
            
             var newid = ObjectId(req.query.restaurantid);

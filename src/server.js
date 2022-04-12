@@ -6,12 +6,12 @@ const server = require('http').createServer(app);
 
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const authRoute = require("../routes/auth");
-const userRoute = require("../routes/users");
-const postRoute = require("../routes/posts")
-const productRoute = require("../routes/product")
-const restaurantRoute = require("../routes/restaurants");
-const shopRoute = require("../routes/shop");
+const authRoute = require("./routes/auth");
+const userRoute = require("./routes/users");
+const postRoute = require("./routes/posts")
+const productRoute = require("./routes/product")
+const restaurantRoute = require("./routes/restaurants");
+const shopRoute = require("./routes/shop");
 const multer = require("multer");
 dotenv.config();
 const cors=require('cors')

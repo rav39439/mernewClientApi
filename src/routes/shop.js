@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Shop = require("../model/Shop");
-const verify = require("../verifyToken");
+const verify = require("../verifytoken");
 const mongoose=require('mongoose')
 const ObjectId=require('mongodb').ObjectId
 

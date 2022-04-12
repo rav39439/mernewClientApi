@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Product = require("../model/Product");
-const verify = require("../verifyToken");
+const verify = require("../verifytoken");
 
 router.post('/',verify,async(req,res)=>{
 

@@ -1,6 +1,6 @@
 
 const { verify } = require('crypto');
-const Restaurant=require('../Model/Restaurant');
+const Restaurant=require('../model/Restaurant');
 const { route } = require('./auth');
 const router = require("express").Router();
 const mongoose=require('mongoose')

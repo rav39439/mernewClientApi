@@ -1,6 +1,6 @@
 const User = require("../model/User");
 const router = require("express").Router();
-const bcrypt = require("bcrypt");
+
 const verify=require('../verifytoken');
 
 const mongoose=require('mongoose');

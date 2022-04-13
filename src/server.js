@@ -53,7 +53,7 @@ app.use(cors(), function(req, res, next) {
 });
 
 app.get("/api/images/:id", (req, res) => {
-  res.sendFile(path.join(__dirname, `./images/${req.params.id}`));
+  res.sendFile(path.join(__dirname, `../images/${req.params.id}`));
 });
 
 

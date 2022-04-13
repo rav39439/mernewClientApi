@@ -29,7 +29,7 @@ var io=require("socket.io")(server, {
 
 
 const path = require("path");
-app.get("/", express.static(path.join(__dirname, "./images")));
+app.get("/", express.static(path.join(__dirname, "../images")));
 
 
 

@@ -204,7 +204,7 @@ socket.on("newnotification",function(data,user){
 
 
 
-server.listen(process.env.PORT,function(){
+server.listen(process.env.PORT||8800,function(){
   console.log("connected")
 
 })

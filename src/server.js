@@ -29,7 +29,7 @@ app.get("/", express.static(path.join(__dirname, "./images")));
 
 const {DATABASE}=process.env
 
-mongoose.connect('mongodb://localhost:27017/reactproject',{useNewUrlParser:true , useUnifiedTopology:true}).then( ()=>
+mongoose.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',{useNewUrlParser:true , useUnifiedTopology:true}).then( ()=>
     console.log("connection successful")
 ).catch((err)=>console.log(err))
 

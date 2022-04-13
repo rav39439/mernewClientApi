@@ -15,14 +15,16 @@ router.post("/",async (req, res) => {
       req.body.password,
       'this is my secret',
     ).toString(),
-    image:"../../../api/images/"+req.body.filename
+    image:req.body.filename
   });
   try {
     const user = await newUser.save();
     const {password,...doc}=user
     res.status(201).json(doc);
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
+
   }
 });
 

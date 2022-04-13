@@ -37,7 +37,7 @@ res.status(200).json(savedrestaurant)
 
 
 
-router.get("/",async(req,res)=>{
+router.get("/",verify,async(req,res)=>{
   
  
 let restaurants
@@ -112,7 +112,7 @@ catch(err){
       });  
       
 
-      router.put("/fooditem", async (req, res) => {
+      router.put("/fooditem",verify, async (req, res) => {
         //if (req.user.isAdmin) {
     console.log("tkshishishishishish")
             var id = mongoose.Types.ObjectId();

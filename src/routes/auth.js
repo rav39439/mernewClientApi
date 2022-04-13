@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const verify = require("../verifytoken");
 
 //REGISTER
-router.post("/", verify,async (req, res) => {
+router.post("/",async (req, res) => {
 
   console.log("apifdgd is running")
   const newUser = new User({
@@ -13,7 +13,7 @@ router.post("/", verify,async (req, res) => {
     email: req.body.email,
     password: CryptoJS.AES.encrypt(
       req.body.password,
-      process.env.SECRET_KEY
+      'this is my secret',
     ).toString(),
     image:"../../../api/images/"+req.body.filename
   });
@@ -27,7 +27,7 @@ router.post("/", verify,async (req, res) => {
 });
 
 //LOGIN
-router.post("/login",verify, async (req, res) => {
+router.post("/login", async (req, res) => {
 
   console.log(req.body.password)
   console.log(req.body.email)
@@ -35,7 +35,7 @@ router.post("/login",verify, async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     !user && res.status(401).json("Wrong password or username!");
 
-    const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
+    const bytes = CryptoJS.AES.decrypt(user.password, 'this is my secret');
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
     originalPassword !== req.body.password &&
@@ -50,8 +50,10 @@ router.post("/login",verify, async (req, res) => {
     const { password, ...info } = user._doc;
 
     res.status(200).json({ ...info, accessToken });
+    console.log("successfully loggin")
   } catch (err) {
     res.status(500).json(err);
+    console.log(err)
   }
 });
 

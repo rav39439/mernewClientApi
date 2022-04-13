@@ -121,7 +121,7 @@ router.get("/",verify,async(req,res)=>{
   })
 
 
-  router.put("/:id", verify, async (req, res) => {
+  router.put("/:id",verify, async (req, res) => {
     //if (req.user.isAdmin) {
       try {
         const updatedproduct = await Product.findByIdAndUpdate(

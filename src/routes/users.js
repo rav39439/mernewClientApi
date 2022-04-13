@@ -11,7 +11,7 @@ const ObjectId=require('mongodb').ObjectId
 
 
 
-router.get("/", verify,async (req, res) => {
+router.get("/",async (req, res) => {
     const userId = req.query.userId;
     const username = req.query.username;
     try {
@@ -25,7 +25,7 @@ router.get("/", verify,async (req, res) => {
     }
   });
 
-  router.delete("/:id",verify, async (req, res) => {
+  router.delete("/:id", async (req, res) => {
     if (req.body.userId == req.params.id || req.body.isAdmin) {
       try {
         await User.findByIdAndDelete(req.params.id);
@@ -38,7 +38,7 @@ router.get("/", verify,async (req, res) => {
     }
   });
 
-  router.put("/updateuser:id", verify, async (req, res) => {
+  router.put("/updateuser:id",  async (req, res) => {
   
       try {
         const updateduser = await User.findByIdAndUpdate(
@@ -61,7 +61,7 @@ router.get("/", verify,async (req, res) => {
 
 
 
-router.put("/orders",verify,async(req,res)=>{
+router.put("/orders",async(req,res)=>{
   console.log(req.body.userid)
   var newid = mongoose.Types.ObjectId();
   
@@ -105,7 +105,7 @@ res.status(400).json(err)
 })  
   
 
-router.put("/notification",verify,async(req,res)=>{
+router.put("/notification",async(req,res)=>{
 
  console.log(req.query.userid)
  console.log(req.query.quantity)
@@ -150,7 +150,7 @@ router.put("/notification",verify,async(req,res)=>{
   
   })
 
-router.put("/ordermessage",verify,async(req,res)=>{
+router.put("/ordermessage",async(req,res)=>{
   
 console.log("order reviecd")
   var id = mongoose.Types.ObjectId();
@@ -188,7 +188,7 @@ console.log("order reviecd")
 
 })
 
-router.put("/removenot",verify,async (req, res) => {
+router.put("/removenot",async (req, res) => {
   //if (req.user.isAdmin) {
    
     var newid = ObjectId(req.body.userid);

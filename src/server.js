@@ -22,7 +22,7 @@ const cors=require('cors')
 
 var io=require("socket.io")(server, {
   cors: {
-    origin: "https://ecommercewebshop.netlify.app/",
+    origin: "https://ecommercewebshop.netlify.app",
     credentials: true
   }
 })
@@ -38,12 +38,12 @@ app.get("/", express.static(path.join(__dirname, "./images")));
 
 const {DATABASE}=process.env
 
-mongoose.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',{useNewUrlParser:true , useUnifiedTopology:true}).then( ()=>
+mongoose.connect(DATABASE,{useNewUrlParser:true , useUnifiedTopology:true}).then( ()=>
     console.log("connection successful")
 ).catch((err)=>console.log(err))
 
 app.use(cors(), function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://ecommercewebshop.netlify.app/"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "https://ecommercewebshop.netlify.app"); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

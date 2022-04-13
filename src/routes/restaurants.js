@@ -319,8 +319,5 @@ res.status(400).json(err)
       
         })
 
-        app.get("/images/:id", (req, res) => {
-          res.sendFile(path.join(__dirname, `../../images/${req.params.id}`));
-        });
-
+       
       module.exports = router;

@@ -114,12 +114,12 @@ catch(err){
 
       router.put("/fooditem",verify, async (req, res) => {
         //if (req.user.isAdmin) {
-    console.log("tkshishishishishish")
+    console.log(req.body.mycode)
             var id = mongoose.Types.ObjectId();
           try {
             const updateditem = await Restaurant.findOneAndUpdate({
     
-              "code":req.body.mycode
+              "restaurantcode":req.body.mycode
             },{
                 $push:{
                   "fooditems":{
@@ -134,6 +134,7 @@ catch(err){
             
             );
             res.status(200).json(updateditem);
+            console.log(updateditem)
           } catch (err) {
             res.status(500).json(err);
           }

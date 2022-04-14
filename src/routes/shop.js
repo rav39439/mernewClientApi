@@ -111,7 +111,7 @@ res.status(200).json(savedShop)
 //   })
 
 
-  router.put("/",verify,async (req, res) => {
+  router.put("/",async (req, res) => {
     //if (req.user.isAdmin) {
 console.log("api request for order")
 console.log("the shopcode "+ req.query.shopcode)

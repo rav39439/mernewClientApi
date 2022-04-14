@@ -29,7 +29,7 @@ credentials: true
 
 
 const path = require("path");
-app.get("/", express.static(path.join(__dirname, "../images")));
+app.get("/", express.static(path.join(__dirname, "./images")));
 
 
 
@@ -53,7 +53,7 @@ app.use(cors(), function(req, res, next) {
 });
 
 app.get("/api/images/:id", (req, res) => {
-  res.sendFile(path.join(__dirname, `../images/${req.params.id}`));
+  res.sendFile(path.join(__dirname, `./images/${req.params.id}`));
 });
 
 

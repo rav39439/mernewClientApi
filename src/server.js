@@ -15,17 +15,17 @@ const shopRoute = require("./routes/shop");
 const multer = require("multer");
 dotenv.config();
 const cors=require('cors')
-const io = require('socket.io')(server, {cors: {origin: "*",
-allowedHeaders: ["my-custom-header"],
-credentials: true
-}});
+// const io = require('socket.io')(server, {cors: {origin: "*",
+// allowedHeaders: ["my-custom-header"],
+// credentials: true
+// }});
 
-// var io=require("socket.io")(server, {
-//   cors: {
-//     origin: "https://ecommercewebshop.netlify.app",
-//     credentials: true
-//   }
-// })
+var io=require("socket.io")(server, {
+  cors: {
+    origin: "https://ecommercewebshop.netlify.app",
+    credentials: true
+  }
+})
 
 
 const path = require("path");
@@ -44,7 +44,7 @@ mongoose.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mong
 ).catch((err)=>console.log(err))
 
 app.use(cors(), function(req, res, next) {
-  res.header("Access-Control-Allow-Origin","http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin","https://mernnewproject.herokuapp.com/api"); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

@@ -112,9 +112,10 @@ catch(err){
       });  
       
 
-      router.put("/fooditem",verify, async (req, res) => {
+      router.put("/fooditem", async (req, res) => {
         //if (req.user.isAdmin) {
     console.log(req.body.mycode)
+    console.log(req.body.itemimage)
             var id = mongoose.Types.ObjectId();
           try {
             const updateditem = await Restaurant.findOneAndUpdate({
@@ -126,6 +127,7 @@ catch(err){
                     "_id":id,
                     "itemname":req.body.itemname,
                     "itemprice":req.body.itemprice,
+                    "itemimage":req.body.itemimage,
                   
                   }
                 }

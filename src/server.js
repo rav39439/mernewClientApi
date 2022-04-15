@@ -183,6 +183,8 @@ socket.on('orderpassed',function(data,shopper,orderid){
   //console.log(sockets[shopper])
   console.log(orderid)
   socket.to(sockets[shopper]).emit('neworder',data,orderid)
+  
+  
 })
 
 socket.on('ordergiven',function(data,shopowner,shoporderid,shopid){
@@ -208,7 +210,6 @@ socket.on("newnotification",function(data,user){
 
 
 });
-
 
 
 

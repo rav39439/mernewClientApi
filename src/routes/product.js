@@ -105,7 +105,7 @@ router.get("/",verify,async(req,res)=>{
   else {
        products=await Product.aggregate([
      
-         {$sample:{size:5}}
+         {$sample:{size:10}}
       ])
       console.log("api hit")
     
@@ -121,11 +121,16 @@ router.get("/",verify,async(req,res)=>{
   })
 
 
-  router.put("/:id",verify, async (req, res) => {
+
+
+  
+  router.put("/",verify, async (req, res) => {
     //if (req.user.isAdmin) {
+
+    console.log("the update id is"+req.body.id)
       try {
         const updatedproduct = await Product.findByIdAndUpdate(
-          req.params.id,
+          req.body.id,
           {
             $set: req.body,
           },

@@ -265,6 +265,7 @@ res.status(400).json(err)
 
                })
                res.status(200).json(updateddata.orders);
+               
                console.log(updateddata.orders)
              } catch (err) {
                console.log(err)

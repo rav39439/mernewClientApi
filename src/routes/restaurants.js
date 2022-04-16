@@ -79,11 +79,13 @@ else if(req.query.city){
 
 else {
      restaurants=await Restaurant.aggregate([
-      {$sample:{size:5}}
+      {$sample:{size:10}}
     ])
   
 }
 res.status(200).json(restaurants)
+
+//console.log(restaurants)
 //}
 }  
 
@@ -165,7 +167,7 @@ catch(err){
     
 
 
-        router.get("/getbycode",async(req,res)=>{
+        router.get("/getbycode",verify,async(req,res)=>{
 
 console.log(req.query.restcode)
 console.log(req.query.restname)

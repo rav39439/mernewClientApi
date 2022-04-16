@@ -62,7 +62,7 @@ router.get("/",async (req, res) => {
 
 
 router.put("/orders",async(req,res)=>{
-  console.log(req.body.userid)
+  console.log("thergesfgtgr"+req.body.userid)
   var newid = mongoose.Types.ObjectId();
   
   try{

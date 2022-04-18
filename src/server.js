@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 const server = require('http').createServer(app);
+const verify=require('../src/verifytoken')
+const {GridFsStorage} = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 
-
-
+const crypto = require('crypto');
 const mongoose = require("mongoose");
+Grid.mongo = mongoose.mongo;
 const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
@@ -43,6 +46,9 @@ mongoose.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mong
     console.log("connection successful")
 ).catch((err)=>console.log(err))
 
+
+const conn = mongoose.createConnection('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',{ useNewUrlParser: true ,useUnifiedTopology: true} );
+
 app.use(cors(), function(req, res, next) {
   res.header("Access-Control-Allow-Origin","https://ecommercewebshop.netlify.app"); // update to match the domain you will make the request from
   res.header(
@@ -62,30 +68,102 @@ app.use(cors(), function(req, res, next) {
 //   next();
 // });
 
-app.get("/api/images/:id", (req, res) => {
-  res.sendFile(path.join(__dirname, `./images/${req.params.id}`));
-});
 
 
 
+///-----------------------multer for local host------------------------
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "images");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, req.body.name);
+//   },
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+
+
+// app.get("/api/images/:id", (req, res) => {
+//   res.sendFile(path.join(__dirname, `./images/${req.params.id}`));
+// });
+
+//--------------------------------------------------------------------
+//-----------------------image upload using grid fs---------------------------------------------------
+let gfs
+conn.once('open', () => {
+    // Init stream
+    gridFSBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+      bucketName: 'uploads'
+    });
+    gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+   
+    
+
+    console.log(gfs.collection.files)
+  });
+
+
+  const storage = new GridFsStorage({
+    url:'mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+          const filename =file.originalname;
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
+        });
+      });
+    }
+  });
+
+  const upload = multer({ storage });
+
+
+
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
   console.log("file uploaded")
 });
 
 
+app.get('/api/images/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
 
+    // Check if image
+    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+      // Read output to browser
+      console.log("thsi is the file name that has to be read as quickly as possible")
+      const readStream = gridFSBucket.openDownloadStream(file._id);     // console.log(res.headers)
+      readStream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an image'
+      });
+    }
+  });
+});
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------
 
 app.use(express.json());
 

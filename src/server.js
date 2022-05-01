@@ -246,6 +246,8 @@ else{
 
 
 }
+
+
 })
 
 
@@ -284,6 +286,7 @@ socket.on("newnotification",function(data,user){
   console.log("the data to be send"+data)
   socket.broadcast.emit("notificationdata",data)
 })
+
 
 
 

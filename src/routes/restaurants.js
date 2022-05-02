@@ -257,20 +257,34 @@ res.status(400).json(err)
                  },
                  { arrayFilters:[{"outer._id":ObjectId(req.body.myorderid)}] }
                );
+               callback()
 
 
-               const updateddata = await Restaurant.findOne({
-                "_id":ObjectId(req.body.myrestaurantid)
-
-
-               })
-               res.status(200).json(updateddata.orders);
+              
+              
                
-               console.log(updateddata.orders)
+               
              } catch (err) {
                console.log(err)
                res.status(500).json(err);
              }
+
+             function callback(){
+              const updateddata =  Restaurant.findOne({
+                "_id":ObjectId(req.body.myrestaurantid)
+  
+  
+               },function(err,data){
+                res.status(200).json(data.orders);
+                console.log(data.orders)
+               })
+  
+              
+             }
+           
+
+
+
            
          });  
 

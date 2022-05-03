@@ -195,7 +195,7 @@ res.status(400).json(err)
 
         router.put("/setorder", verify,async (req, res) => {
           //if (req.user.isAdmin) {
-      console.log("dsafdafafafa")
+     
               var id = mongoose.Types.ObjectId();
              //var restaurantid = mongoose.Types.ObjectId(req.body.restaurantid);
             try {
@@ -223,21 +223,29 @@ res.status(400).json(err)
               }
               
               );
-
-              const uprestaurant = await Restaurant.findOne(
-                
-                {
-      
-                "_id":ObjectId(req.body.restaurantid)
-
-                })
-              res.status(200).json({
-                "restaurant":uprestaurant,
-                "id":id
-              });
+                    
+           // callback
             } catch (err) {
               res.status(500).json(err);
             }
+           // function callback(){
+              console.log("dsafdafafafa")  
+            const uprestaurant =  Restaurant.findOne(
+                
+              {
+    
+              "_id":ObjectId(req.body.restaurantid)
+
+              },function(err,data){
+                res.status(200).json({
+                  "restaurant":data,
+                  "id":id
+                });
+
+              })
+           
+        // }
+
           
         });  
         

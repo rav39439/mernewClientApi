@@ -184,7 +184,9 @@ $and:[{
  
 })
 res.status(200).json(restuarant)
-          } catch(err){
+          } 
+          
+          catch(err){
 res.status(400).json(err)
           }
         })

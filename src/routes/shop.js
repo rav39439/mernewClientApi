@@ -133,7 +133,9 @@ console.log("the shopcode "+ req.query.shopcode)
                 "productname":req.query.productname,
                 "phone":req.query.phone,
                 "email":req.query.email,
-                "userid":req.query.userid
+                "userid":req.query.userid,
+                "status":req.query.status,
+               // "shopcode":req.query.shopcode
   
               }
             }
@@ -193,6 +195,10 @@ let updatedres;
 
 
   })
+
+
+
+
 
  
   router.delete('/:id',verify, async(req,res)=>{
@@ -264,7 +270,7 @@ let updatedres;
               });  
 
 
-              router.put("/removedata", verify,async (req, res) => {
+              router.put("/removedata",async (req, res) => {
                 //if (req.user.isAdmin) {
                  
                   var newid = ObjectId(req.query.shopid);
@@ -312,6 +318,54 @@ let updatedres;
             
             
               })
+
+
+
+
+              router.put("/updateorder", verify, async (req, res) => {
+                // if (req.user.isAdmin) {
+                  console.log("the new shopid is"+ req.body.shopid)
+                  console.log("the new orderid is"+ req.body.orderid)
+               //var restaurantid = mongoose.Types.ObjectId(req.query.restaurantid)
+               ///var orderid = mongoose.Types.ObjectId(req.query.orderid)
+      
+                   try {
+                     const updateshop = await Shop.findOneAndUpdate({
+                      "_id":ObjectId(req.body.shopid)
+                      }, {
+                         $set: {
+                           "Orderrec.$[outer].status":"accepted"
+                         },
+                       },
+                       { arrayFilters:[{"outer._id":ObjectId(req.body.orderid)}] }
+                     );
+                     callback();                
+                   } catch (err) {
+                     console.log(err)
+                     res.status(500).json(err);
+                   }
+      
+                   function callback(){
+                    const updateddata =  Shop.findOne({
+                      "_id":ObjectId(req.body.shopid)
+        
+        
+                     },function(err,data){
+                      res.status(200).json(data.Orderrec);
+                      console.log(data.Orderrec)
+                     })
+        
+                    
+                   }
+                 
+      
+      
+      
+                 
+               });  
+      
+      
+               
 
 
 

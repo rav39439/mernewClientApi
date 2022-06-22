@@ -4,6 +4,7 @@ const server = require('http').createServer(app);
 //const verify=require('../src/verifytoken')
 const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+const ObjectId=require('mongodb').ObjectId
 
 const crypto = require('crypto');
 const mongoose = require("mongoose");
@@ -41,6 +42,8 @@ app.get("/", express.static(path.join(__dirname, "./images")));
 
 //const DATABASE=process.env.DATABASE
 //console.log(DATABASE)
+var MongoClient=require("mongodb").MongoClient;
+
 
 mongoose.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',{useNewUrlParser:true , useUnifiedTopology:true}).then( ()=>
     console.log("connection successful")
@@ -133,6 +136,46 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
   console.log("file uploaded")
 });
+
+
+app.post('/api/images/:id', (req, res) => {
+console.log('fiel is going ')
+  // gfs.files.deleteOne({ filename: req.params.id, root: 'uploads' }, (err, gridStore) => {
+  //   if (err) {
+  //     return res.status(404).json({ err: err });
+  //   }
+  //   console.log('fiel is deleted ')
+  //   ///res.redirect('/');
+  // });
+  var cursor=gfs.files.find({})
+  MongoClient.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',{useNewUrlParser:true},function(error,client){
+    var myclient=client.db("reactproject=true&w=majority")
+    console.log("DB connected")
+ 
+
+ 
+cursor.forEach(function(doc){
+    
+  console.log(doc)  
+
+  if(req.params.id==doc.filename){
+    console.log(doc._id)
+    myclient.collection("uploads.chunks").deleteMany({
+                files_id:ObjectId(doc._id)
+         })
+       console.log("deleted")  
+
+  }
+  myclient.collection('uploads.files').deleteOne({
+ filename:req.params.id
+  })
+});
+});
+})
+
+
+
+
 
 
 app.get('/api/images/:filename', (req, res) => {

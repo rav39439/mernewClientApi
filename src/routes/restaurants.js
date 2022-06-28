@@ -116,8 +116,8 @@ catch(err){
 
       router.put("/fooditem", async (req, res) => {
         //if (req.user.isAdmin) {
-    console.log(req.body.mycode)
-    console.log(req.body.itemimage)
+    //console.log(req.body.mycode)
+    //console.log(req.body.itemimage)
             var id = mongoose.Types.ObjectId();
           try {
             const updateditem = await Restaurant.findOneAndUpdate({
@@ -138,7 +138,7 @@ catch(err){
             
             );
             res.status(200).json(updateditem);
-            console.log(updateditem)
+          //  console.log(updateditem)
           } catch (err) {
             res.status(500).json(err);
           }
@@ -169,8 +169,8 @@ catch(err){
 
         router.get("/getbycode",verify,async(req,res)=>{
 
-console.log(req.query.restcode)
-console.log(req.query.restname)
+//console.log(req.query.restcode)
+//console.log(req.query.restname)
           try{
 const restuarant=await Restaurant.findOne({
 $and:[{
@@ -197,8 +197,10 @@ res.status(400).json(err)
 
         router.put("/setorder", verify,async (req, res) => {
           //if (req.user.isAdmin) {
-     
+     console.log("asdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
               var id = mongoose.Types.ObjectId();
+
+              console.log(req.body.restuarantid)
              //var restaurantid = mongoose.Types.ObjectId(req.body.restaurantid);
             try {
               const updatedrestaurant = await Restaurant.updateOne({
@@ -231,7 +233,7 @@ res.status(400).json(err)
               res.status(500).json(err);
             }
            // function callback(){
-              console.log("dsafdafafafa")  
+             // console.log("dsafdafafafa")  
             const uprestaurant =  Restaurant.findOne(
                 
               {
@@ -253,7 +255,7 @@ res.status(400).json(err)
         
         router.put("/updateorder", verify, async (req, res) => {
           // if (req.user.isAdmin) {
-            console.log("the new restaurantid is"+ req.body.myrestaurantid)
+          //  console.log("the new restaurantid is"+ req.body.myrestaurantid)
          //var restaurantid = mongoose.Types.ObjectId(req.query.restaurantid)
          ///var orderid = mongoose.Types.ObjectId(req.query.orderid)
 
@@ -305,8 +307,8 @@ res.status(400).json(err)
            
             var newid = ObjectId(req.query.restaurantid);
             var order =ObjectId(req.query.orderid);
-            console.log(newid)
-            console.log(order)
+           // console.log(newid)
+           // console.log(order)
 
           
              // var id = mongoose.Types.ObjectId();

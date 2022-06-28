@@ -239,7 +239,7 @@ router.post("/getuser",verify,async (req, res) => {
   const userId = req.body.userid;
   const username = req.body.username;
   console.log(userId)
-  console.log(username)
+ console.log(username)
   try {
     const myuser=await User.findOne({
 $and:[{

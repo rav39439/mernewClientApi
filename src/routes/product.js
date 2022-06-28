@@ -42,16 +42,19 @@ router.get("/",verify,async(req,res)=>{
          { $match:{company:req.query.company,category:req.query.category,price:{$lt:parseInt(req.query.price)}}},
                {$sample:{size:10}},
       ])
+     
  
   }
   else if((req.query.company)&&(req.query.category)){
+   
+
    
      products=await Product.aggregate([
        {$match:{company:req.query.company,category:req.query.category}},
          { $sample:{size:1}},
   
       ])
-  
+ 
   }
   
   

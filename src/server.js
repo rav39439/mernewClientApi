@@ -134,7 +134,7 @@ conn.once('open', () => {
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
-  console.log("file uploaded")
+ // console.log("file uploaded")
 });
 
 
@@ -190,7 +190,7 @@ app.get('/api/images/:filename', (req, res) => {
     // Check if image
     if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
       // Read output to browser
-      console.log("thsi is the file name that has to be read as quickly as possible")
+     // console.log("thsi is the file name that has to be read as quickly as possible")
       const readStream = gridFSBucket.openDownloadStream(file._id);     // console.log(res.headers)
       readStream.pipe(res);
     } else {
@@ -304,6 +304,8 @@ socket.on('orderpassed',function(data,shopper,orderid){
   console.log(data)
   console.log(shopper)
   //console.log(sockets[shopper])
+
+  console.log("sdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   console.log(orderid)
   socket.to(sockets[shopper]).emit('neworder',data,orderid)
   

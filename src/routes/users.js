@@ -167,6 +167,7 @@ console.log("order reviecd")
             "quantity":req.body.quantity,
           "email":req.body.email,
            "message":req.body.message,
+           "userid":req.body.userid,
            "read":'unread'
 
           }
@@ -190,7 +191,7 @@ console.log("order reviecd")
 
 router.put("/removenot",async (req, res) => {
   //if (req.user.isAdmin) {
-   
+   console.log("sdafggggggggggggggggggggggggggggggg")
     var newid = ObjectId(req.body.userid);
     var notiid =ObjectId(req.body.notid);
     console.log(newid)

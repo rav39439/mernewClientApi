@@ -294,10 +294,6 @@ res.status(400).json(err)
               
              }
            
-
-
-
-           
          });  
 
 
@@ -340,15 +336,7 @@ res.status(400).json(err)
               })
               res.status(200).json(update)
             console.log(update)
-
-
-
           }
-
-
-             
-      
-      
         })
 
        

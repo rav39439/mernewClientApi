@@ -7,7 +7,6 @@ const verify = require("../verifytoken");
 //REGISTER
 router.post("/",async (req, res) => {
 
-  console.log("apifdgd is running")
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
@@ -34,14 +33,15 @@ router.post("/login", async (req, res) => {
   
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("Wrong password or username!");
+    
+    !user && res.send("Wrong username!")
 
-    const bytes = CryptoJS.AES.decrypt(user.password, 'this is my secret');
+    const bytes = CryptoJS.AES.decrypt(user.password, 'this is my secret')
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
     originalPassword !== req.body.password &&
-    res.status(401).json("Wrong password or username!");
-
+    //res.status(401).json("Wrong password !");
+res.send("wrong password")
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       'this is my secret',
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
     const { password, ...info } = user._doc;
 
     res.status(200).json({ ...info, accessToken });
-    console.log(info)
+    
   } catch (err) {
     res.status(500).json(err);
     console.log(err)

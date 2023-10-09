@@ -280,7 +280,6 @@ const newupdate=await User.findOneAndUpdate({
 
 
 )
-console.log("hakdhfafshlkfahlafs")
 const newupdat=await User.findOne({
 
   "_id":ObjectId(req.body.myuserid)

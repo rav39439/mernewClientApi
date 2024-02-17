@@ -52,24 +52,24 @@ mongoose.connect('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mong
 
 const conn = mongoose.createConnection('mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/reactproject=true&w=majority',{ useNewUrlParser: true ,useUnifiedTopology: true} );
 
-// app.use(cors(), function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin","https://ecommercewebshop.netlify.app"); // update to match the domain you will make the request from
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
-
 app.use(cors(), function(req, res, next) {
-  res.header("Access-Control-Allow-Origin","http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin","https://ecommercewebshop.netlify.app"); // update to match the domain you will make the request from
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
 });
+
+
+// app.use(cors(), function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin","http://localhost:3000"); // update to match the domain you will make the request from
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 
 
@@ -156,7 +156,6 @@ console.log('fiel is going ')
  
 cursor.forEach(function(doc){
     
-  console.log(doc)  
 
   if(req.params.id==doc.filename){
     console.log(doc._id)
@@ -253,10 +252,10 @@ socket.on('message',({name,message,person})=>{
     //   message:message
     // }
     // allps.push(pmessage)
-    console.log(message)
-    console.log(name)
-    console.log(person)
-    console.log(sockets[person])
+    // console.log(message)
+    // console.log(name)
+    // console.log(person)
+    // console.log(sockets[person])
 // for(let i=0;i<sockets.length;i++){
 //if(myusers[i]==name){
   //console.log(sockets[i])
@@ -281,8 +280,8 @@ else{
     // }
     // mymessages.push(allmessage)
     
-    console.log(message)
-    console.log(name)
+    // console.log(message)
+    // console.log(name)
     io.emit("public message",{name,message})
  // }
 
@@ -309,10 +308,10 @@ socket.on('orderpassed',function(data,shopper,orderid){
 })
 
 socket.on('ordergiven',function(data,shopowner,shoporderid,shopid){
-  console.log(data)
-  console.log(shopowner)
-  console.log(sockets[shopowner])
-  console.log(shoporderid)
+  // console.log(data)
+  // console.log(shopowner)
+  // console.log(sockets[shopowner])
+  // console.log(shoporderid)
   //console.log(myusers)
   socket.to(sockets[shopowner]).emit('newshoporder',data,shoporderid,shopid)
 })
